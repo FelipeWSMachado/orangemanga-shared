@@ -13,14 +13,16 @@ const donorSchema = new Schema(
 
 const donationSchema = new Schema(
   {
-    livepixChargeId: { type: String, required: true, unique: true, index: true },
+    providerPaymentId: { type: String, unique: true, index: true, sparse: true },
     donor: { type: donorSchema, default: () => ({}) },
     amountCents: { type: Number, required: true },
     currency: { type: String, default: "BRL" },
     message: { type: String },
     status: { type: String, enum: DONATION_STATUSES, default: "pending", index: true },
-    qrCodeUrl: { type: String },
-    paymentUrl: { type: String },
+    qrCode: { type: String },
+    qrCodeBase64: { type: String },
+    ticketUrl: { type: String },
+    expiresAt: { type: Date },
     paidAt: { type: Date },
     rawWebhookPayload: { type: Schema.Types.Mixed },
     showOnPublicWall: { type: Boolean, default: true },
