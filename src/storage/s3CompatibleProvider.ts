@@ -41,8 +41,17 @@ export function createS3CompatibleStorageProvider(config: S3CompatibleStorageCon
     },
 
     getPublicUrl(key) {
+      // Com forcePathStyle (ex: MinIO), o objeto sempre é acessado como
+      // /bucket/key, não importa qual domínio chega até ele — mesmo um
+      // domínio "próprio" na frente (túnel/reverse proxy) ainda serve pelo
+      // caminho com estilo de path. Sem forcePathStyle (ex: R2/S3 com um
+      // domínio customizado apontando direto pra raiz do bucket), a key vai
+      // sozinha, sem prefixo de bucket.
+      const includeBucket = config.forcePathStyle ?? false;
+
       if (config.publicBaseUrl) {
-        return `${config.publicBaseUrl.replace(/\/$/, "")}/${key}`;
+        const base = config.publicBaseUrl.replace(/\/$/, "");
+        return includeBucket ? `${base}/${config.bucket}/${key}` : `${base}/${key}`;
       }
       const base = config.endpoint ?? `https://s3.${config.region}.amazonaws.com`;
       return `${base.replace(/\/$/, "")}/${config.bucket}/${key}`;
