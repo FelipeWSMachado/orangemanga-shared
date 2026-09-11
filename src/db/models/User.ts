@@ -11,6 +11,10 @@ const userSchema = new Schema(
     status: { type: String, enum: USER_STATUSES, default: "active", index: true },
     refreshTokenVersion: { type: Number, default: 0 },
     favorites: [{ type: Schema.Types.ObjectId, ref: "Manga" }],
+    totpEnabled: { type: Boolean, default: false },
+    totpSecret: { type: String },
+    totpPendingSecret: { type: String },
+    totpRecoveryCodeHashes: [{ type: String }],
   },
   { timestamps: true }
 );
