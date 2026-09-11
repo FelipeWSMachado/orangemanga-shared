@@ -6,3 +6,4 @@ export * from "./Rating";
 export * from "./Donation";
 export * from "./AnalyticsEvent";
 export * from "./AdSlotConfig";
+export * from "./RateLimitHit";
