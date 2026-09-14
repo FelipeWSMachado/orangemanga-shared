@@ -7,3 +7,5 @@ export * from "./Donation";
 export * from "./AnalyticsEvent";
 export * from "./AdSlotConfig";
 export * from "./RateLimitHit";
+export * from "./ReadingProgress";
+export * from "./VisitorProfile";

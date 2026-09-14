@@ -11,6 +11,10 @@ const userSchema = new Schema(
     status: { type: String, enum: USER_STATUSES, default: "active", index: true },
     refreshTokenVersion: { type: Number, default: 0 },
     favorites: [{ type: Schema.Types.ObjectId, ref: "Manga" }],
+    preferences: {
+      allowAdult: { type: Boolean, default: false },
+      readerMode: { type: String, enum: ["scroll", "paginated"], default: "scroll" },
+    },
     totpEnabled: { type: Boolean, default: false },
     totpSecret: { type: String },
     totpPendingSecret: { type: String },

@@ -67,3 +67,9 @@ export const REFRESH_TOKEN_TTL_SECONDS = 30 * 24 * 60 * 60; // 30 dias
 export const ACCESS_TOKEN_COOKIE = "access_token";
 export const REFRESH_TOKEN_COOKIE = "refresh_token";
 export const VISITOR_ID_COOKIE = "visitor_id";
+
+export const GUEST_READING_SLOTS = 3;
+export const ACCOUNT_READING_SLOTS = 10;
+
+export const READER_MODES = ["scroll", "paginated"] as const;
+export type ReaderMode = (typeof READER_MODES)[number];
