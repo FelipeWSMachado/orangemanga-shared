@@ -8,6 +8,7 @@ export * from "./AnalyticsEvent";
 export * from "./AdSlotConfig";
 export * from "./AdGateConfig";
 export * from "./AdGateState";
+export * from "./TakedownRequest";
 export * from "./RateLimitHit";
 export * from "./ReadingProgress";
 export * from "./VisitorProfile";

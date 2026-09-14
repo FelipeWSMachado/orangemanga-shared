@@ -73,3 +73,6 @@ export const ACCOUNT_READING_SLOTS = 10;
 
 export const READER_MODES = ["scroll", "paginated"] as const;
 export type ReaderMode = (typeof READER_MODES)[number];
+
+export const TAKEDOWN_STATUSES = ["pending", "reviewing", "resolved", "rejected"] as const;
+export type TakedownStatus = (typeof TAKEDOWN_STATUSES)[number];
