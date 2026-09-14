@@ -27,3 +27,15 @@ export const updateAccountSchema = z.object({
   preferences: visitorPrefsSchema.optional(),
 });
 export type UpdateAccountInput = z.infer<typeof updateAccountSchema>;
+
+export const changePasswordSchema = z.object({
+  currentPassword: z.string().min(1).max(72),
+  newPassword: z.string().min(8).max(72),
+});
+export type ChangePasswordInput = z.infer<typeof changePasswordSchema>;
+
+export const changeEmailSchema = z.object({
+  newEmail: z.string().trim().toLowerCase().email(),
+  currentPassword: z.string().min(1).max(72),
+});
+export type ChangeEmailInput = z.infer<typeof changeEmailSchema>;
