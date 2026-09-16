@@ -39,3 +39,20 @@ export const changeEmailSchema = z.object({
   currentPassword: z.string().min(1).max(72),
 });
 export type ChangeEmailInput = z.infer<typeof changeEmailSchema>;
+
+export const emailVerifyCodeSchema = z.object({
+  code: z.string().length(6),
+});
+export type EmailVerifyCodeInput = z.infer<typeof emailVerifyCodeSchema>;
+
+export const requestPasswordResetSchema = z.object({
+  email: z.string().trim().toLowerCase().email(),
+});
+export type RequestPasswordResetInput = z.infer<typeof requestPasswordResetSchema>;
+
+export const confirmPasswordResetSchema = z.object({
+  email: z.string().trim().toLowerCase().email(),
+  code: z.string().length(6),
+  newPassword: z.string().min(8).max(72),
+});
+export type ConfirmPasswordResetInput = z.infer<typeof confirmPasswordResetSchema>;
