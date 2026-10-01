@@ -1,5 +1,5 @@
 import { z } from "zod";
-import { COMMENT_TARGET_TYPES } from "../config";
+import { COMMENT_TARGET_TYPES, COMMENT_REPORT_REASONS } from "../config";
 
 export const createCommentSchema = z.object({
   targetType: z.enum(COMMENT_TARGET_TYPES),
@@ -18,3 +18,9 @@ export const moderateCommentSchema = z.object({
   status: z.enum(["visible", "hidden"]),
 });
 export type ModerateCommentInput = z.infer<typeof moderateCommentSchema>;
+
+export const reportCommentSchema = z.object({
+  reason: z.enum(COMMENT_REPORT_REASONS),
+  note: z.string().trim().max(500).optional(),
+});
+export type ReportCommentInput = z.infer<typeof reportCommentSchema>;

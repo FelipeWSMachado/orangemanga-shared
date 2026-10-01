@@ -19,6 +19,12 @@ export type CommentTargetType = (typeof COMMENT_TARGET_TYPES)[number];
 export const COMMENT_STATUSES = ["visible", "hidden", "pending"] as const;
 export type CommentStatus = (typeof COMMENT_STATUSES)[number];
 
+export const COMMENT_REPORT_REASONS = ["racism", "harassment", "spam", "adult_content", "other"] as const;
+export type CommentReportReason = (typeof COMMENT_REPORT_REASONS)[number];
+
+export const COMMENT_REPORT_STATUSES = ["pending", "resolved", "dismissed"] as const;
+export type CommentReportStatus = (typeof COMMENT_REPORT_STATUSES)[number];
+
 export const RATING_MODES = ["simple", "advanced"] as const;
 export type RatingMode = (typeof RATING_MODES)[number];
 
@@ -34,6 +40,7 @@ export const ANALYTICS_EVENT_TYPES = [
   "search",
   "signup",
   "donation_completed",
+  "ad_view",
 ] as const;
 export type AnalyticsEventType = (typeof ANALYTICS_EVENT_TYPES)[number];
 
