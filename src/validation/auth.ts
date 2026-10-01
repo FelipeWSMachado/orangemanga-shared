@@ -2,9 +2,21 @@ import { z } from "zod";
 import { READER_MODES } from "../config";
 
 export const registerSchema = z.object({
-  email: z.string().trim().toLowerCase().email(),
+  email: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .email({ message: "Email inválido" })
+    .refine((value) => /^[^\s@]+@[^\s@]+\.[a-z]{2,}$/i.test(value), { message: "Email inválido" }),
   password: z.string().min(8).max(72),
   displayName: z.string().trim().min(2).max(40),
+  username: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .min(3)
+    .max(20)
+    .regex(/^[a-z][a-z0-9_]{2,19}$/, "Username: letras minúsculas, números e underline"),
   allowAdult: z.boolean().optional(),
   readerMode: z.enum(READER_MODES).optional(),
   readerDisplay: z
@@ -40,6 +52,14 @@ export type VisitorPrefsInput = z.infer<typeof visitorPrefsSchema>;
 
 export const updateAccountSchema = z.object({
   displayName: z.string().trim().min(2).max(40).optional(),
+  username: z
+    .string()
+    .trim()
+    .toLowerCase()
+    .min(3)
+    .max(20)
+    .regex(/^[a-z][a-z0-9_]{2,19}$/, "Username: letras minúsculas, números e underline")
+    .optional(),
   preferences: visitorPrefsSchema.optional(),
 });
 export type UpdateAccountInput = z.infer<typeof updateAccountSchema>;
@@ -67,10 +87,10 @@ export const confirmChangeEmailSchema = z.object({
 });
 export type ConfirmChangeEmailInput = z.infer<typeof confirmChangeEmailSchema>;
 
-export const emailVerifyCodeSchema = z.object({
-  code: z.string().length(6),
+export const emailVerifyTokenSchema = z.object({
+  token: z.string().trim().min(20).max(200),
 });
-export type EmailVerifyCodeInput = z.infer<typeof emailVerifyCodeSchema>;
+export type EmailVerifyTokenInput = z.infer<typeof emailVerifyTokenSchema>;
 
 export const requestPasswordResetSchema = z.object({
   email: z.string().trim().toLowerCase().email(),
